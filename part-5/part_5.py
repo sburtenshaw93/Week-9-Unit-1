@@ -113,12 +113,38 @@ def print_library(book):
 # Clean up the code. Make your application functional.
 # Great job getting your first Python application finished!
 
+def list_library(book_list):
+    print(f"""
+          Title: {book_list["title"]},
+          Author: {book_list["author"]},
+          Year: {book_list["year"]},
+          Rating: {book_list["rating"]},
+          Pages: {book_list["pages"]}
+          """)
+
+    
+def view_library(information_center):
+    print("\n Here is the library list")
+    for books in print_library(information_center):
+        list_library(books)
+        
+        
+def total_books(count):
+    print(f"""\n
+          You currently have {len(count.print_library())} books
+          \n""")        
+
 def main_menu(book_information):
     
     answer = True
     
     while answer:
-        user_choices = input("Option 1, Add book: Option 2, View book list: Option 3: Total books in library, Option 4: Total pages, Option 5, Leave page ")
+        user_choices = input("""
+Option 1, Add book: 
+Option 2, View book list: 
+Option 3: Total books in library: 
+Option 4: Total pages: 
+Option 5, Leave page:  """)
     
         if user_choices == "1":
             create_book_list(book_information)
