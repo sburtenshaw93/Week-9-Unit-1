@@ -1,43 +1,3 @@
-print(f"The dunder name of part_5.py is {__name__}")
-
-library = [
-    {
-        "title": "Fellowship of the ring",
-        "author": "J.R.R Tolkien",
-        "year": "1954",
-        "rating": 4.9,
-        "pages": 423        
-    },
-    {
-        "title": "The Two Towers",
-        "author": "J.R.R Tolkien",
-        "year": "1954", 
-        "rating": 4.5,
-        "pages": 352        
-    },
-    {
-        "title": "The Return of the King",
-        "author": "J.R.R Tolkien",
-        "year": "1955",
-        "rating": 4.9,
-        "pages": 416        
-    },
-    {
-        "title": "The Hobit",
-        "author": "J.R.R Tolkien",
-        "year": "1937",
-        "rating": 4.3,
-        "pages": 304,   
-    },
-    {
-        "title": "Green Eggs and Ham?",
-        "author": "Dr Seuss",
-        "year": "1960",
-        "rating": 4.9,
-        "pages": 50   
-    }
-]
-
 ### Step 1 - Store data in a .txt
 
 ## This step's instructions explains how to use the open()function, 
@@ -77,24 +37,27 @@ def create_book_list(library):
 
 # Code here
 
-def print_library(book):
+def print_library(library):
     print("\n All books listed\n")
     
-    with open(book, "r") as file:
+    with open(library, "r") as file:
         lines = file.readlines()
         
+        books = []
         for line in lines:
             title, author, year, rating, pages = line.strip().split(",")
-            book_dictionary = {
+            book = {
                 "Title": title,
                 "Author": author,
                 "Year": year,
                 "Rating": float(rating),
                 "Pages": int(pages)
             }
-            print(book_dictionary)
+            print(book)
+            books.append(book)
             
-            
+        return books
+                
 
 ### Step 3 - if __name__ == "__main__":
 
@@ -113,28 +76,29 @@ def print_library(book):
 # Clean up the code. Make your application functional.
 # Great job getting your first Python application finished!
 
-def list_library(book_list):
+def list_library(book):
     print(f"""
-          Title: {book_list["title"]},
-          Author: {book_list["author"]},
-          Year: {book_list["year"]},
-          Rating: {book_list["rating"]},
-          Pages: {book_list["pages"]}
+          Title: {book["title"]},
+          Author: {book["author"]},
+          Year: {book["year"]},
+          Rating: {book["rating"]},
+          Pages: {book["pages"]}
           """)
 
     
-def view_library(information_center):
+def view_library(library):
     print("\n Here is the library list")
-    for books in print_library(information_center):
-        list_library(books)
+    for book in print_library(library):
+        list_library(book)
         
         
-def total_books(count):
+def total_books(library):
     print(f"""\n
-          You currently have {len(count.print_library())} books
+          You currently have {len(print_library(library))} books
           \n""")        
 
-def main_menu(book_information):
+
+def main_menu(library):
     
     answer = True
     
@@ -147,15 +111,15 @@ Option 4: Total pages:
 Option 5, Leave page:  """)
     
         if user_choices == "1":
-            create_book_list(book_information)
+            create_book_list(library)
         elif user_choices == "2":
-            print_library(book_information)
+            print_library(library)
         elif user_choices == "3":
-             with open(book_information, "r") as file:
+             with open(library, "r") as file:
                 lines = file.readlines()
                 print(f"\n total {len(lines)} books \n")
         elif user_choices == "4":
-            with open(book_information, "r") as file:
+            with open(library, "r") as file:
                 lines = file.readlines()
                 total_pages = 0
                 for line in lines:
@@ -168,5 +132,6 @@ Option 5, Leave page:  """)
         else:
             print("\n Error: Please enter a number")
 
+
 if __name__ == '__main__':
-    main_menu('test.txt')
+    main_menu('library.txt')
